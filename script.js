@@ -59,26 +59,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function getRandomSong(decades, genres) {
     const songs = getSongs();
-    const filteredSongs = songs.filter(song =>
-        decades.includes(song.decade) && genres.includes(song.genre)
-    );
-    if (filteredSongs.length > 0) {
-        return filteredSongs[Math.floor(Math.random() * filteredSongs.length)];
+    const availableSongs = [];
+
+    decades.forEach(decade => {
+        genres.forEach(genre => {
+            if (songs[decade] && songs[decade][genre]) {
+                availableSongs.push(...songs[decade][genre].map(song => ({ ...song, decade, genre })));
+            }
+        });
+    });
+
+    if (availableSongs.length > 0) {
+        return availableSongs[Math.floor(Math.random() * availableSongs.length)];
     }
     return null;
 }
 
 function getSongs() {
-    // Replace with your actual song data.
-    return [
-        { title: 'Hound Dog', artist: 'Elvis Presley', decade: '1950s', genre: 'Rock' },
-        { title: 'Like a Rolling Stone', artist: 'Bob Dylan', decade: '1960s', genre: 'Rock' },
-        { title: 'Hotel California', artist: 'Eagles', decade: '1970s', genre: 'Rock' },
-        { title: 'Billie Jean', artist: 'Michael Jackson', decade: '1980s', genre: 'Pop' },
-        { title: 'Smells Like Teen Spirit', artist: 'Nirvana', decade: '1990s', genre: 'Rock' },
-        { title: 'Crazy in Love', artist: 'Beyoncé', decade: '2000s', genre: 'R&B' },
-        { title: 'Rolling in the Deep', artist: 'Adele', decade: '2010s', genre: 'Pop' },
-        { title: 'As It Was', artist: 'Harry Styles', decade: '2020s', genre: 'Pop' },
-        // Add more songs...
-    ];
+    return {
+        '1950s': {
+            'Rock': [
+                { title: 'Johnny B. Goode', artist: 'Chuck Berry', year: 1958 },
+                { title: 'Great Balls of Fire', artist: 'Jerry Lee Lewis', year: 1957 },
+                { title: 'Hound Dog', artist: 'Elvis Presley', year: 1956 }
+            ],
+            'Jazz': [
+                { title: 'Take Five', artist: 'Dave Brubeck', year: 1959 },
+                { title: 'So What', artist: 'Miles Davis', year: 1959 },
+                { title: 'Moanin\'', artist: 'Art Blakey', year: 1958 }
+            ],
+            'Pop': [
+                { title: 'Peggy Sue', artist: 'Buddy Holly', year: 1957 },
+                { title: 'Come Fly With Me', artist: 'Frank Sinatra', year: 1958 },
+                { title: 'Diana', artist: 'Paul Anka', year: 1957 }
+            ]
+        },
+        '1960s': {
+            // ... (add other decades and genres) ...
+        },
+        '1970s': {
+            // ... (add other decades and genres) ...
+        },
+        '1980s': {
+            // ... (add other decades and genres) ...
+        },
+        '1990s': {
+            // ... (add other decades and genres) ...
+        },
+        '2000s': {
+             // ... (add other decades and genres) ...
+        },
+        '2010s': {
+             // ... (add other decades and genres) ...
+        },
+        '2020s': {
+             // ... (add other decades and genres) ...
+        }
+    };
 }
