@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', () => {
+
 import { sdk } from 'https://esm.sh/@farcaster/frame-sdk';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -117,3 +119,76 @@ function getSongs() {
         }
     };
 }
+    
+   // Admin Controls
+    document.getElementById('show-add-form').addEventListener('click', () => {
+        document.getElementById('add-song-form').style.display = 'block';
+        document.getElementById('import-sheets-section').style.display = 'none';
+    });
+
+    document.getElementById('show-import-sheets').addEventListener('click', () => {
+        document.getElementById('add-song-form').style.display = 'none';
+        document.getElementById('import-sheets-section').style.display = 'block';
+    });
+
+    // Form Submission
+    document.getElementById('add-song-button').addEventListener('click', () => {
+        const title = document.getElementById('title').value;
+        const artist = document.getElementById('artist').value;
+        const year = parseInt(document.getElementById('year').value);
+        const decade = document.getElementById('decade').value;
+        const genre = document.getElementById('genre').value;
+
+        if (title && artist && year && decade && genre) {
+            const newSong = { title, artist, year, decade, genre };
+            const songs = getSongs();
+            songs.push(newSong);
+            window.getSongs = () => songs;
+            document.getElementById('title').value = '';
+            document.getElementById('artist').value = '';
+            document.getElementById('year').value = '';
+            alert('Song added!');
+        } else {
+            alert('Please fill in all fields.');
+        }
+    });
+
+    // Google Sheets Import
+    document.getElementById('import-songs-button').addEventListener('click', () => {
+        const googleSheetUrl = document.getElementById('google-sheets-url').value;
+
+        if (googleSheetUrl) {
+            fetch(googleSheetUrl)
+                .then(response => response.text())
+                .then(csvData => {
+                    const songs = parseCsv(csvData);
+                    const currentSongs = getSongs();
+                    const allSongs = currentSongs.concat(songs);
+                    window.getSongs = () => allSongs;
+                    alert('Songs imported!');
+                });
+        } else {
+            alert('Please enter a Google Sheets CSV URL.');
+        }
+    });
+
+    function parseCsv(csvData) {
+        const lines = csvData.split('\n');
+        const headers = lines[0].split(',');
+        const songs = [];
+
+        for (let i = 1; i < lines.length; i++) {
+            const values = lines[i].split(',');
+            if (values.length === headers.length) {
+                const song = {};
+                for (let j = 0; j < headers.length; j++) {
+                    song[headers[j].trim().toLowerCase()] = values[j].trim();
+                }
+                if(song.title){
+                    songs.push(song);
+                }
+            }
+        }
+        return songs;
+    }
+});
