@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Throwback Tunes</title>
+    <meta name="fc:frame" content='{"version": "next", "imageUrl": "PLACEHOLDER", "button": {"title": "Find My Tune", "action": {"type": "launch_frame", "name": "Throwback Tunes", "url": "PLACEHOLDER", "splashImageUrl": "YOUR_SPLASH_IMAGE_URL.png", "splashBackgroundColor": "#f0f0f0"}}}'>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .decade-button, .genre-button, #randomize-button, #share-button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Throwback Tunes</h1>
+    <div>
+        <h2>Select Decades:</h2>
+        <button class="decade-button" data-decade="1950s">1950s</button>
+        <button class="decade-button" data-decade="1960s">1960s</button>
+        <button class="decade-button" data-decade="1970s">1970s</button>
+        <button class="decade-button" data-decade="1980s">1980s</button>
+        <button class="decade-button" data-decade="1990s">1990s</button>
+        <button class="decade-button" data-decade="2000s">2000s</button>
+        <button class="decade-button" data-decade="2010s">2010s</button>
+        <button class="decade-button" data-decade="2020s">2020s</button>
+    </div>
+    <div>
+        <h2>Select Genres:</h2>
+        <button class="genre-button" data-genre="Pop">Pop</button>
+        <button class="genre-button" data-genre="Rock">Rock</button>
+        <button class="genre-button" data-genre="Hip-Hop">Hip-Hop</button>
+        <button class="genre-button" data-genre="R&B">R&B</button>
+        <button class="genre-button" data-genre="Country">Country</button>
+        <button class="genre-button" data-genre="Electronic">Electronic</button>
+    </div>
+    <button id="randomize-button">Randomize Tune</button>
+    <div id="result"></div>
+    <button id="share-button" style="display: none;">Share Tune</button>
+    <script type="module" src="./script.js"></script>
+</body>
+</html>
