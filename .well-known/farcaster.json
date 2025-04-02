@@ -1,0 +1,11 @@
+{
+  "frame": {
+    "version": "1",
+    "name": "Throwback Tunes",
+    "homeUrl": "YOUR_VERCEL_URL",
+    "imageUrl": "https://www.insidehook.com/wp-content/uploads/2022/01/blocks-records.jpg?fit=1200%2C800",
+    "buttonTitle": "Find My Tune",
+    "splashImageUrl": "https://cdn-icons-png.flaticon.com/512/3355/3355318.png",
+    "splashBackgroundColor": "#f0f0f0"
+  }
+}
